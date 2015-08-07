@@ -90,7 +90,7 @@ $(document).ready(function () {
                 }
             ]
         });
-        sendEventValue("Page View", "action: view, title: "+document.title, 1);
+        sendEventValue("Page View", "action: view, title: "+document.title, 0);
         if (debug) {
             console.table(dataLayer);
         }
