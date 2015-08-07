@@ -98,20 +98,23 @@
     return seed;
   }
 
-  /**
-   * Sets a cookie.
-   * @param {string} name The cookie's name.
-   * @param {number|string} value The cookie's value.
-   * @pram {number} days The expiration time in days.
-   * @private
-   */
+    /**
+     * Sets a cookie.
+     * @param {string} name The cookie's name.
+     * @param {number|string} value The cookie's value.
+     * @param {number} days The expiration time in days.
+     * @private
+     */
   function _setCookie(name,value,days) {
+      var expires = "";
     if (days) {
       var date = new Date();
       date.setTime(date.getTime()+(days*24*60*60*1000));
-      var expires = "; expires="+date.toGMTString();
+      expires = "; expires="+date.toGMTString();
     }
-    else var expires = "";
+    else {
+        expires = "";
+    }
     document.cookie = name+"="+value+expires+"; path=/";
   }
 

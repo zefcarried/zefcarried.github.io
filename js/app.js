@@ -41,9 +41,12 @@ function sendEventValue(eventCategory, eventAction, eventValue) {
 
 $(document).ready(function () {
     try {
+        var digitalOceanButtonText = $("#digitalocean-button").text();
+        var digitalOceanButtonClasses = $("#digitalocean-button").attr("class");
+        sendEvent("DigitalOcean Impression: " + digitalOceanButtonClasses, digitalOceanButtonText);
         $("#digitalocean-button").click(function (e) {
                 var url = "https://goo.gl/hRQNmq";
-                sendEvent("DigitalOcean Click: " + $(this).attr("class"), $(this).text());
+                sendEvent("DigitalOcean Click: " + digitalOceanButtonClasses, digitalOceanButtonText);
                 window.open(url, "_blank");
                 e.preventDefault();
             }
@@ -90,7 +93,7 @@ $(document).ready(function () {
                 }
             ]
         });
-        sendEventValue("Page View", "action: view, title: "+document.title, 0);
+        sendEventValue("Page View", "action: view, title: " + document.title, 0);
         if (debug) {
             console.table(dataLayer);
         }
