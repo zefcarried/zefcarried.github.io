@@ -42,7 +42,7 @@ function sendEventValue(eventCategory, eventAction, eventValue) {
 $(document).ready(function () {
     try {
         $("#digitalocean-button").click(function (e) {
-                var url = "https://www.digitalocean.com/?refcode=4a302f6cfbc4";
+                var url = "https://goo.gl/hRQNmq";
                 sendEvent("DigitalOcean Click: " + $(this).attr("class"), $(this).text());
                 window.open(url, "_blank");
                 e.preventDefault();
