@@ -9,6 +9,13 @@ function sendEvent(eventCategory, eventAction) {
             'eventLabel': window.location.href
         });
     } catch (err) {
+        console.log(err);
+        dataLayer.push({
+            'event': 'GAEvent',
+            'eventCategory': 'Error',
+            'eventAction': err,
+            'eventLabel': window.location.href
+        });
     }
 }
 
@@ -22,6 +29,13 @@ function sendEventValue(eventCategory, eventAction, eventValue) {
             'eventValue': eventValue,
         });
     } catch (err) {
+        console.log(err);
+        dataLayer.push({
+            'event': 'GAEvent',
+            'eventCategory': 'Error',
+            'eventAction': err,
+            'eventLabel': window.location.href
+        });
     }
 }
 
@@ -81,5 +95,12 @@ $(document).ready(function () {
             console.table(dataLayer);
         }
     } catch (err) {
+        console.log(err);
+        dataLayer.push({
+            'event': 'GAEvent',
+            'eventCategory': 'Error',
+            'eventAction': err,
+            'eventLabel': window.location.href
+        });
     }
 });
