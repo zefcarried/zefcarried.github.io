@@ -76,7 +76,7 @@ $(document).ready(function () {
                 }
             ]
         });
-        sendEventValue("View", "Page", 1);
+        sendEventValue("Page View", document.title, 1);
         if (debug) {
             console.table(dataLayer);
         }
