@@ -1,45 +1,84 @@
-function sendEvent(eventCategory,eventAction) {
-  try {
-  dataLayer.push({
-          'event': 'GAEvent',
-          'eventCategory': eventCategory,
-          'eventAction': eventAction,
-          'eventLabel': window.location.href
-  });
-  } catch(err) {}
-}
+var debug = false;
 
-function sendEventValue(eventCategory,eventAction,eventValue) {
-  try {
-  dataLayer.push({
-          'event': 'GAEvent',
-          'eventCategory': eventCategory,
-          'eventAction': eventAction,
-          'eventLabel': window.location.href,
-          'eventValue': eventValue,
-  });
-  } catch(err) {}
-}
-
-$(document).ready(function() {
-  try {
-    window.dataLayer = window.dataLayer || [];
-    console.log("Document ready!");
-    // continue
-    //sendEvent('Foo','Bar');
-    //sendEvent('Button','Click');
-    $("a").click(function (e) {
+function sendEvent(eventCategory, eventAction) {
+    try {
         dataLayer.push({
             'event': 'GAEvent',
-                'eventCategory': 'Outbound Link Click',
-                'eventAction': $(this).attr("href"),
-                'eventLabel': window.location.href
+            'eventCategory': eventCategory,
+            'eventAction': eventAction,
+            'eventLabel': window.location.href
         });
-        window.location.href = window.location.origin+window.location.pathname+"#google"
-    });
-    $("a").click(function (e) {
-        e.preventDefault();
-    });
-    console.table(dataLayer);
-  } catch(err) {}
+    } catch (err) {
+    }
+}
+
+function sendEventValue(eventCategory, eventAction, eventValue) {
+    try {
+        dataLayer.push({
+            'event': 'GAEvent',
+            'eventCategory': eventCategory,
+            'eventAction': eventAction,
+            'eventLabel': window.location.href,
+            'eventValue': eventValue,
+        });
+    } catch (err) {
+    }
+}
+
+$(document).ready(function () {
+    try {
+        $("#digitalocean-button").click(function (e) {
+                var url = "https://www.digitalocean.com/?refcode=4a302f6cfbc4";
+                sendEventValue("DigitalOcean Link Click", $(this).text(), 2);
+                window.open(url, "_blank");
+                e.preventDefault();
+            }
+        ).easyab({
+                'slot': 1,
+                'name': 'digitalocean-button-color',
+                'default-value': 'btn-primary',
+                'alternatives': [
+                    {
+                        'value': 'btn-danger',
+                        'alternative': function ($this) {
+                            $this.removeClass('btn-primary').addClass('btn-danger');
+                        }
+                    },
+                    {
+                        'value': 'btn-success',
+                        'alternative': function ($this) {
+                            $this.removeClass('btn-primary').addClass('btn-success');
+                        }
+                    }
+                ]
+            });
+        $("a").click(function (e) {
+            sendEvent("Outbound Link Click", $(this).attr("href"));
+            window.open($(this).attr("href"), "_blank");
+            e.preventDefault();
+        });
+        $("#digitalocean-button-text").easyab({
+            'slot': 2,
+            'name': 'digitalocean-button-text',
+            'default-value': 'only',
+            'alternatives': [
+                {
+                    'alternative': 'just'
+                },
+                {
+                    'alternative': 'as little as'
+                },
+                {
+                    'alternative': 'under'
+                },
+                {
+                    'alternative': 'merely'
+                }
+            ]
+        });
+        if (debug) {
+            console.table(dataLayer);
+        }
+    } catch (err) {
+    }
 });
