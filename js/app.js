@@ -29,7 +29,7 @@ $(document).ready(function () {
     try {
         $("#digitalocean-button").click(function (e) {
                 var url = "https://www.digitalocean.com/?refcode=4a302f6cfbc4";
-                sendEventValue("DigitalOcean Link Click", $(this).text(), 2);
+                sendEvent("DigitalOcean Click: " + $(this).attr("class"), $(this).text());
                 window.open(url, "_blank");
                 e.preventDefault();
             }
@@ -76,6 +76,7 @@ $(document).ready(function () {
                 }
             ]
         });
+        sendEventValue("View", "Page", 1);
         if (debug) {
             console.table(dataLayer);
         }
