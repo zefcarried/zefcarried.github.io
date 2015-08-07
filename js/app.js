@@ -1,4 +1,4 @@
-var debug = false;
+var debug = true;
 
 function sendEvent(eventCategory, eventAction) {
     try {
@@ -90,8 +90,22 @@ $(document).ready(function () {
                 }
             ]
         });
-        sendEventValue("Page View", "action: view, title: "+document.title, 0);
+        sendEventValue("Page View", "action: view, title: " + document.title, 0);
         if (debug) {
+            dataLayer.push([
+                {
+                    'event': 'GAEvent',
+                    'eventCategory': 'Test Event 1',
+                    'eventAction': "action: view, title: " + document.title,
+                    'eventLabel': window.location.href
+                },
+                {
+                    'event': 'GAEvent',
+                    'eventCategory': 'Test Event 2',
+                    'eventAction': "action: view, title: " + document.title,
+                    'eventLabel': window.location.href
+                }
+            ]);
             console.table(dataLayer);
         }
     } catch (err) {
